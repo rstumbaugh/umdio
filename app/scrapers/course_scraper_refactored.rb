@@ -33,8 +33,24 @@ department_pages.each do |department|
 end
 
 
-# Nokogiri::HTML(open(url))
-#   .search('div.course-sections')
-#   .map do |e|
-#     puts e.attr('id')
-#   end
+list_of_sections = []
+list_of_queries.each do |query|
+
+  section = Nokogiri::HTML(open(query))
+    .search('div.section-info-container')
+
+  list_of_sections << {
+    :section_id => section.search('section-id').text,
+    :instructor => section.search('.section-instructor a').text,
+    :seats => {
+      :total => section.search('.total-seats-count').text,
+      :open => section.search('.open-seats-count').text,
+      :waitlist => section.search('.waitlist-count').text
+    },
+    :start_date => section.search('.section-start-date').text,
+    :end_date => section.search('.section-end-date').text
+  }
+
+end
+
+
