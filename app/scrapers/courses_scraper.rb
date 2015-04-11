@@ -25,7 +25,10 @@ db = MongoClient.new(host, port, pool_size: 150, pool_timeout: 20).db('umdclass'
 
 # Specify the years we want to add to the database here!
 years = ['2014','2015']
-semesters = years.map { |e| [e + '01', e + '05', e + '08', e + '12'] }.flatten # year plus starting month is term id
+semesters = years.map { |e| [e + '01', e + '05', e + '08', e + '12'] }.flatten
+
+list_of_semesters = years.map { |e| [e + '01', e + '05', e + '08', e + '12'] }.flatten
+
 
 semesters.each do |semester|
   coll = db.collection('courses' + semester)
@@ -44,10 +47,8 @@ semesters.each do |semester|
     raise "trying to open #{base_url} failed"
   end
 
-  #grab departments from schedule home
+  #grab departments from schedule home for specific semester
   departments = schedule_home.search('span.prefix-abbrev').map {|e| e.text.strip }
-
-  puts "found #{departments.length} departments"
 
   threads ||= []
 
