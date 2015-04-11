@@ -1,4 +1,4 @@
-#An API for UMD data 
+#An API for UMD data
 
 Status: We are live at [umd.io](http://umd.io)
 
@@ -105,6 +105,6 @@ write tests --> add functionality --> make tests pass --> write tests
 - [Nginx](http://nginx.org/en/docs/)
 
 ###Notes:
-- Security: 
+- Security:
   - We should thoroughly test our system's security from the beginning, and have evidence that we are secure - that way, more people can trust us with their data!
   - Eventually, a single API for UMD data is much less vulnerable than a thousand separate databases everywhere - do it right once, enforce it strictly, then you only have one thing to worry about. Defense in depth, lock everything tight. Open is more secure than closed, because you have more eyes on it.

@@ -30,7 +30,7 @@ module Sinatra
           # get buildings by building id
           app.get '/v0/map/buildings/:building_id' do
             building_ids = params[:building_id].split(",")
-            building_ids.each {|building_id| halt 400, bad_url_error(bad_id_message) unless is_building_id? building_id}             
+            building_ids.each {|building_id| halt 400, bad_url_error(bad_id_message) unless is_building_id? building_id}
             buildings = buildings_collection.find({number: { '$in' => building_ids}},{fields: {:_id => 0}}).to_a
             # get rid of [] on single object return
             buildings = buildings[0] if building_ids.length == 1
@@ -40,7 +40,7 @@ module Sinatra
           end
 
         end
-   
+
       end
     end
   end

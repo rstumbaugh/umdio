@@ -1,6 +1,6 @@
 require 'rspec/core/rake_task'
 #require File.expand_path('../config/application', __FILE__)
- 
+
 namespace :db do
   desc "Build Database"
   task :up => ['db:down'] do

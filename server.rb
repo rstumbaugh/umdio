@@ -1,6 +1,6 @@
 # umdio api core application. brings in other dependencies as needed.
 ENV['RACK_ENV'] ||= 'development'
- 
+
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 
@@ -28,7 +28,7 @@ class UMDIO < Sinatra::Base
     port = ENV['MONGO_RUBY_DRIVER_PORT'] || MongoClient::DEFAULT_PORT
     puts "Connecting to mongo on #{host}:#{port}"
     # we might need other databases for other endpoints, but for now this is fine, with multiple collections
-    set :courses_db, MongoClient.new(host, port, pool_size: 20, pool_timeout: 5).db('umdclass') 
+    set :courses_db, MongoClient.new(host, port, pool_size: 20, pool_timeout: 5).db('umdclass')
     set :buses_db, MongoClient.new(host,port, pool_size: 20, pool_timeout: 5).db('umdbus')
     set :map_db, MongoClient.new(host,port, pool_size: 20, pool_timeout: 5).db('umdmap')
   end

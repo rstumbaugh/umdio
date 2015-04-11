@@ -39,7 +39,7 @@ module Sinatra
           # in nextbus api terms, this is routeConfig - the info for a route
           app.get '/v0/bus/routes/:route_id' do
             route_ids = params[:route_id].downcase.split(",")
-            route_ids.each {|route_id| halt 400, bad_url_error(bad_route_message) unless is_route_id? route_id}             
+            route_ids.each {|route_id| halt 400, bad_url_error(bad_route_message) unless is_route_id? route_id}
             # API call
             # address = apiRoot + "&command=routeConfig"
             # Net::HTTP.get(URI(address + "&r=#{route_id}")).to_s
@@ -105,9 +105,9 @@ module Sinatra
 
           # get predicted arrivals for a stop -- this one isn't working because the NextBus API docs lie. Frustrating.
           # app.get 'v0/bus/stops/:stop_id/arrivals'
-            
+
           # end
-          
+
         end
       end
     end

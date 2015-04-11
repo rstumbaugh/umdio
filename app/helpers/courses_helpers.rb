@@ -8,7 +8,7 @@ module Sinatra
         if section_ids.length > 1
           section_coll.find({section_id: { '$in' => section_ids } },{fields: {_id: 0}}).to_a
         else
-          section_coll.find({section_id: section_ids[0]}, {fields: {_id: 0}}).to_a[0] 
+          section_coll.find({section_id: section_ids[0]}, {fields: {_id: 0}}).to_a[0]
           # is returning the single object without [] weird? should we return the array without []?
         end
       end

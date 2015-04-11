@@ -1,4 +1,4 @@
-# script for getting route info from nextbus api, dumping into Mongo database. 
+# script for getting route info from nextbus api, dumping into Mongo database.
 # will be run regularly using a cronjob or ruby equivalent, started by the server
 
 require 'mongo'
@@ -31,10 +31,10 @@ route_array.each do |route|
   address = apiRoot + "&command=routeConfig&r=#{route["route_id"]}"
   route_response = parse(Net::HTTP.get(URI(address)).to_s)["route"]
   stops = route_response["stop"].map {|e| {"stop_id"=>e["tag"], "title"=>e["title"], "lon"=>e["lon"], "lat"=>e["lat"]}}
-  stops_set.merge(stops)  
+  stops_set.merge(stops)
   paths = route_response["path"].map {|e| e["point"] }
   directions = [].push(route_response["direction"]).flatten
-  directions = directions.map do |e| 
+  directions = directions.map do |e|
     {
       "direction_id"=>e["tag"],
       "title"=>e["title"],
@@ -47,10 +47,10 @@ route_array.each do |route|
     stops: stops,
     directions: directions,
     paths:  paths,
-    lat_max: route_response["latMax"], 
+    lat_max: route_response["latMax"],
     lat_min: route_response["latMin"],
     lon_max: route_response["lonMax"],
-    lon_min: route_response["lonMin"], 
+    lon_min: route_response["lonMin"],
   })
 end
 

@@ -94,7 +94,7 @@ semesters.each do |semester|
           :also_offered_as => /Also offered as[^.]+/.match(description).to_a
         }
 
-        # Getting the Section data for the course 
+        # Getting the Section data for the course
         # set up array to hold different sections of a class
         sections = []
         begin
@@ -178,10 +178,10 @@ semesters.each do |semester|
           :relationships => course_relationships,
           :sections => sections
           })
-        
+
       end
     }
-    
+
   end
 
   puts "joining threads!"
