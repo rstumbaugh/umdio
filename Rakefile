@@ -40,6 +40,16 @@ task :scrape do
   sh 'ruby app/scrapers/buildings.rb'
 end
 
+desc "Test scraping"
+task :scrape_test do
+  sh 'ruby app/scrapers/temp.rb 2017'
+end
+
+desc "Scrape courses only"
+task :scrape_course do
+  sh 'ruby app/scrapers/courses_scraper.rb 2017'
+end
+
 task :setup => ['db:clean','db:up','scrape']
 
 desc "Start the web server"

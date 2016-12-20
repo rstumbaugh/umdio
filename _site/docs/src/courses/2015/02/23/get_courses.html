@@ -1,0 +1,55 @@
+<p>Get information about one or more courses.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/&lt;course_id&gt;</code></p>
+
+<p>Get information about one course.</p>
+
+<p><em>Returns:</em> The <a href="#course_object">course object</a> specified, or a 404 error, letting you know that the course doesn’t exist on the database.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/&lt;course_ids&gt;</code></p>
+
+<p>Get information about multiple courses where <code class="highlighter-rouge">course_ids</code> is a comma-seperated list of <code class="highlighter-rouge">course_id</code>’s.</p>
+
+<p><em>Returns:</em> Array of <a href="#course_object">course objects</a>. If one of the course objects does not exist, the rest are still returned.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample Request</strong></p>
+
+<p><code class="highlighter-rouge">GET http://api.umd.io/v0/courses/ENES100</code></p>
+
+<p>Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENES100"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Introduction to Engineering Design"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dept_id"</span><span class="p">:</span><span class="s2">"ENES"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineering Science"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"semester"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201501"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"grading_method"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Regular"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pass-Fail"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Audit"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"core"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"PS"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"gen_ed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DSSP"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Students work as teams to design..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"coreqs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Corequisite: MATH140"</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ENES100-0101"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0201"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0202"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0301"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0302"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0401"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0501"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0502"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0601"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0602"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENES100-0801"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

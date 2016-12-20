@@ -1,0 +1,44 @@
+<p>Get detailed info about one or more bus routes.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/bus/routes/&lt;route_id&gt;</code></p>
+
+<p><em>Returns</em>: Specified <a href="#route_object">route object</a>.</p>
+
+<hr />
+<p><code class="highlighter-rouge">http://api.umd.io/v0/bus/routes/&lt;route_ids&gt;</code></p>
+
+<p><em>Returns</em>: Specified <a href="#route_object">route objects</a>, where <code class="highlighter-rouge">route_ids</code> is a comma-separated list of route_ids, like <code class="highlighter-rouge">115,118,701</code>.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample Request</strong></p>
+
+<p><code class="highlighter-rouge">GET http://api.umd.io/v0/bus/routes/115</code></p>
+
+<p>Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"route_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"701"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"701 UMB BioPark"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"directions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"direction_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"peargara"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pearl St Garage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"direction_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ramsapts"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ramsay St Apts"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"lat_max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39.2995236"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lat_min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39.28301"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lon_max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76.620848"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lon_min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76.6320545"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

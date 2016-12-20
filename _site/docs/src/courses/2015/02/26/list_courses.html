@@ -1,0 +1,25 @@
+<p>List all the courses available (for the given semester, or the current semester by default).</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/list</code></p>
+
+<p><em>Returns:</em> Array of objects with three properties: <code class="highlighter-rouge">course_id</code>, <code class="highlighter-rouge">name</code>, and <code class="highlighter-rouge">department</code></p>
+
+<!-- EXAMPLE -->
+
+<p>Request: <code class="highlighter-rouge">GET http://api.umd.io/v0/courses/list</code>
+Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AASP100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Introduction to African American Studies"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"African American Studies"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AASP101"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Public Policy and the Black Community"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"department"</span><span class="p">:</span><span class="s2">"African American Studies"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<!-- END -->

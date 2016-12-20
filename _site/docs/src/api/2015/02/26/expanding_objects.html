@@ -1,0 +1,9 @@
+<p>Queries that return the ID of another object nested within the result can be expanded via the <code class="highlighter-rouge">?expand=&lt;object&gt;</code> parameter. For example, the query <code class="highlighter-rouge">http://api.umd.io/v0/courses/cmsc131</code> returns a “sections” key with an array of Section object ids. To expand these into their full objects, you can pass <code class="highlighter-rouge">?expand=sections</code> to expand the section ids to their section objects.</p>
+
+<!-- EXAMPLE -->
+
+<p>Example expand query: <code class="highlighter-rouge">http://api.umd.io/v0/courses/cmsc131?expand=sections</code></p>
+
+<p>Currently, this only works on the <a href="/courses/#get_courses">Get courses</a> endpoint.</p>
+
+<!-- END_EXAMPLE -->

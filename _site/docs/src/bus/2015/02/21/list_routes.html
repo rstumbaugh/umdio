@@ -1,0 +1,31 @@
+<p>List all the bus routes. Returns the route ids and the names of the routes.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/bus/routes</code></p>
+
+<p><em>Returns</em>: Array of the bus routes as JSON Objects with ‘route_id’ and ‘title’ fields.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample Request</strong></p>
+
+<p><code class="highlighter-rouge">GET http://api.umd.io/v0/bus/routes</code></p>
+
+<p>Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"route_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"109"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"109 River Road"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"route_id"</span><span class="p">:</span><span class="s2">"114"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"University View"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"route_id"</span><span class="p">:</span><span class="s2">"115"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"115 Orange"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<!-- END -->

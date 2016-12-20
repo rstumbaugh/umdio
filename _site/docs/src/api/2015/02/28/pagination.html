@@ -1,0 +1,49 @@
+<p>Endpoints that return a large amount of items are paginated to 30 items by default. You can specify further pages with the <code class="highlighter-rouge">?page</code> parameter. You can also set a custom page size up to 100 with the <code class="highlighter-rouge">?per_page</code> parameter.</p>
+
+<p><em>Note that page numbering is 1-based and that omitting the ?page parameter will return the first page.</em></p>
+
+<hr />
+
+<h3 id="link-header">Link Header:</h3>
+
+<p>The possible <code class="highlighter-rouge">rel</code> values are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">next</code></td>
+      <td>Shows the URL of the immediate next page of results.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">last</code></td>
+      <td>Shows the URL of the last page of results.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">first</code></td>
+      <td>Shows the URL of the first page of results.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">prev</code></td>
+      <td>Shows the URL of the immediate previous page of results.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- EXAMPLE -->
+
+<p><em>Example:</em> <code class="highlighter-rouge">http://api.umd.io/v0/courses?page=2&amp;per_page=100</code></p>
+
+<p><br /><br /><br /><br /><br /><br /><br /></p>
+
+<h4 id="response-link-header">Response Link Header:</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;http://api.umd.io/v0/courses?page=2&amp;per_page=100&gt;; rel=”next”, &lt;http://api.umd.io/v0/courses?page=1&amp;per_page=100&gt;; rel=”prev”
+</code></pre>
+</div>
+
+<!-- END_EXAMPLE -->

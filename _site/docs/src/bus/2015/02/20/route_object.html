@@ -1,0 +1,78 @@
+<p>The route object represents a bus route. The properties of a route are:</p>
+
+<p><code class="highlighter-rouge">route_id</code> – a unique three digit route number. Examples: <em>“115”, “701”</em>.</p>
+
+<p><code class="highlighter-rouge">title</code> – string name of the route. Examples: <em>“115 Orange”, “701 UMB BioPark”</em></p>
+
+<p><code class="highlighter-rouge">stops</code> – Array of bus stops on a route. Stops have a unique string <code class="highlighter-rouge">stop_id</code>, a full <code class="highlighter-rouge">title</code>, and <code class="highlighter-rouge">lon</code> (longitude) and <code class="highlighter-rouge">lat</code> (latitude) coordinates. Routes have a lot of stops, so this might look a little messy.</p>
+
+<p><code class="highlighter-rouge">directions</code> – Array of directions the bus travels. A direction has a unique string <code class="highlighter-rouge">direction_id</code>, a <code class="highlighter-rouge">title</code>, and an array of <code class="highlighter-rouge">stops</code> specifying the stops along the route in that direction. Many buses only have one direction, ‘loop’ , which has all stops on the route. Otherwise, there are usually two directions, mostly named for the final stop in that direction.</p>
+
+<p><code class="highlighter-rouge">paths</code> – When you want to draw the route on the map, you use the <em>paths</em>. These are several arrays (an array of arrays) of latitude and longitude coordinates (points). According to NextBus, connect the points in array separately, and you will end up with a nice outline of the route. Don’t try to connect the points between the arrays of points, because they won’t match up. There are a lot of points (a few hundred) for each route.</p>
+
+<p>The next four are useful if you are trying to fit the route in a map window.</p>
+
+<p><code class="highlighter-rouge">lat_max</code> – Maximum latitude of the bus route.</p>
+
+<p><code class="highlighter-rouge">lat_min</code> – Minimum latitude of the bus route.</p>
+
+<p><code class="highlighter-rouge">lon_max</code> – Maximum longitude of the bus route.</p>
+
+<p><code class="highlighter-rouge">lon_min</code> – Minimum longitude of the bus route.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample route object</strong>
+(trimmed for space - there are more stops and path data)</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="w">  </span><span class="p">{</span><span class="nt">"route_id"</span><span class="p">:</span><span class="s2">"115"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"115 Orange"</span><span class="p">,</span><span class="w">  
+  </span><span class="nt">"stops"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">{</span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"lot1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Union Dr at Lot 1b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.9481576"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9872099"</span><span class="p">},</span><span class="w">
+
+    </span><span class="p">{</span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"cspac"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Valley Drive at Stadium Drive Garage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.949374"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.990882"</span><span class="p">},</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"directions"</span><span class="p">:[{</span><span class="w">
+    </span><span class="nt">"direction_id"</span><span class="p">:</span><span class="s2">"loop"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Loop"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stops"</span><span class="p">:[</span><span class="s2">"lot1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cspac"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"elk"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"hage"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"laplat"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"camb"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"regegara_d"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"paths"</span><span class="p">:[</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.9432099"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98756"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.943614"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.987555"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.943945"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9876099"</span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93915"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98243"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93908"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9824"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93877"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98232"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93867"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9823"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93855"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98228"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93838"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98225"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93818"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9822"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93797"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98215"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93791"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.98216"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93787"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9822"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"lon"</span><span class="p">:</span><span class="s2">"-76.93786"</span><span class="p">,</span><span class="nt">"lat"</span><span class="p">:</span><span class="s2">"38.9822599"</span><span class="p">}]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"lat_max"</span><span class="p">:</span><span class="s2">"38.99297"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lat_min"</span><span class="p">:</span><span class="s2">"38.9824312"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lon_max"</span><span class="p">:</span><span class="s2">"-76.9370967"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lon_min"</span><span class="p">:</span><span class="s2">"-76.949374"</span><span class="w">
+  </span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

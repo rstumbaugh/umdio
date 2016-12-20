@@ -1,0 +1,41 @@
+<p><strong>200 - OK</strong></p>
+
+<p>Everything worked as expected. If you aren’t getting the result you expected, it might mean that the data you are trying to access doesn’t actually exist in the database.</p>
+
+<p><strong>400 - Bad Request</strong></p>
+
+<p>This means that the url in your request couldn’t possibly match anything in the api, probably because of a misspelling.</p>
+
+<p><strong>404 - Not Found</strong></p>
+
+<p>The requested url doesn’t exist. This happens when the url isn’t anything on our end, not even a badly formed request.</p>
+
+<p><strong>500 - Internal Server Error</strong></p>
+
+<p>Something went wrong on our end. We try not to send you this. If you get one, let us know, and send us all you can about the circumstances of your error.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample requests</strong></p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/ENGL101</code>
+200: Works as expected</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/ene10</code>
+400: ‘ene’ is only 3 letters and ‘10’ is only two digits, so there is no way this could be a proper request.</p>
+
+<p><code class="highlighter-rouge">http://blargyblarg.umd.io</code>
+404: blargybarg isn’t on our server, so you won’t find it. If you misspell a word in a url, you might get this.</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v5/courses</code>
+404: Courses aren’t at version 5 yet. (We’re not even up to version 1!)</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/courses</code>
+404: You need to specify a version number!</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/course</code>
+404: ‘course’ isn’t an endpoint; ‘courses’ is. Even little misspellings will get ya!</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses/ENGL115</code>
+404: There’s no course with that course_id.</p>
+
+<!-- END -->

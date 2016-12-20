@@ -1,0 +1,53 @@
+<p><code class="highlighter-rouge">http://api.umd.io/v0/courses</code></p>
+
+<p><em>Returns:</em> a <a href="/#pagination">Paginated</a> array of <a href="#course_object">Course objects</a>.</p>
+
+<hr />
+
+<h3 id="parameters">Parameters:</h3>
+
+<p><code class="highlighter-rouge">sort</code> – a comma-separated list of course properties. Defaults to ASCENDING order, use a <code class="highlighter-rouge">-</code> (minus) prefix for DESCENDING order.
+<br />For example, <code class="highlighter-rouge">?sort=course_id,-credits</code> sorts the results ASCENDING by course_id and DESCENDING by credits.</p>
+
+<p>To <strong>search</strong> for courses, use each course property as a parameter and one of the following comparisions: <code class="highlighter-rouge">=</code> (equals), <code class="highlighter-rouge">!=</code> (not equals), <code class="highlighter-rouge">&lt;</code> (less than), <code class="highlighter-rouge">&gt;</code> (greater than), <code class="highlighter-rouge">&lt;=</code> (less than or equals) and <code class="highlighter-rouge">&gt;=</code> (greater than or equals) followed by the value or a list of values.
+<br />For example, <code class="highlighter-rouge">?dept_id=CMSC,BMGT&amp;credits&lt;2</code> gives all courses in the CMSC or BMGT departments worth less than 2 credits.</p>
+
+<p><em>See the <a href="/#course_object">Course object</a> for a full list of available properties.</em></p>
+
+<hr />
+
+<p>When searching array properties, the <code class="highlighter-rouge">|</code> (pipe) delimeter may be used instead of a comma to only return results that all the values.
+<br />For example, <code class="highlighter-rouge">?grading_method=Audit|Pass-Fail</code> gives all courses whose grading method is both Audit and Pass-Fail.</p>
+
+<!-- EXAMPLE -->
+
+<p>Request: <code class="highlighter-rouge">GET http://api.umd.io/v0/courses?dept_id=CMSC,BMGT&amp;credits&lt;2</code>
+Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BMGT888W"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Special Topics in Supply Chain Management; Workshop in Supply Chain Management"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dept_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BMGT"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"sections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"BMGT888W-0101"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"BMGT888W-0101"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CMSC100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bits and Bytes of Computer Science"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dept_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CMSC"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"sections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"CMSC100-0101"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CMSC100-0101"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<!-- END -->

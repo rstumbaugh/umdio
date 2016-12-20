@@ -1,0 +1,44 @@
+<p>The section object represents a single section of a course. The properties of a section are:</p>
+
+<p><code class="highlighter-rouge">section_id</code> – a unique section identifier, like <em>ENES100-0101</em>. Always the related <code class="highlighter-rouge">course_id</code> with a four-digit section number appended to it.</p>
+
+<p><code class="highlighter-rouge">course_id</code> – The course that the section belongs to.</p>
+
+<p><code class="highlighter-rouge">instructors</code> – An Array of names of the instructors for this section.</p>
+
+<p><code class="highlighter-rouge">seats</code> – The total number of seats offered in a section.</p>
+
+<p><code class="highlighter-rouge">semester</code> – Six-digit number specifying the semester a course is offered.</p>
+
+<p><code class="highlighter-rouge">meetings</code> – Array of JSON objects with the following properties: 
+  <code class="highlighter-rouge">days</code>: string of days for that meeting, like <em>“MWF”, “TuTh”</em>.
+  <code class="highlighter-rouge">start_time</code>: start time of the meeting, like <em>“9:00am”</em>.
+  <code class="highlighter-rouge">end_time</code>: end time of the meeting.
+  <code class="highlighter-rouge">building</code>: building where the meeting takes place, like <em>“KEY”</em>.
+  <code class="highlighter-rouge">room</code>: Four digit room code where the meeting takes place.
+  <code class="highlighter-rouge">classtype</code>: String indicates what type of meeting. Could be <em>“Lecture”</em>, <em>“Discussion”</em>, or <em>“Lab”</em>.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample section object</strong></p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"section_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENGL101-0101"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENGL101"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"instructors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Christopher Philpot"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"seats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"semester"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201501"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"meetings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"days"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MWF"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00am"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:50am"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"room"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0120"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"classtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lecture"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

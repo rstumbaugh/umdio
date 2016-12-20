@@ -1,0 +1,22 @@
+<p>Get location data about one or more buildings. Comma separated building numbers are the parameters.</p>
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/map/buildings/:building_number</code></p>
+
+<p><em>Returns</em>: A list of complete <a href="#building_object">building objects</a>.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Get Buildings</strong></p>
+
+<p>GET <code class="highlighter-rouge">http://api.umd.io/v0/map/buildings/251</code></p>
+
+<p>returns</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"251 North"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"251"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76.9496090325357"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38.99274005"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

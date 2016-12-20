@@ -1,0 +1,50 @@
+<p>Get locations of all the umd buses.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/bus/locations</code></p>
+
+<p><em>Returns</em>: Object with several properties - meta information and the list of locations for vehicles.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample Request</strong></p>
+
+<p><code class="highlighter-rouge">GET http://api.umd.io/v0/bus/locations</code></p>
+
+<p>Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+</span><span class="nt">"vehicle"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76.61603"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"routeTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"702"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"predictable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"speedKmHr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dirTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"charpenn"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"heading"</span><span class="p">:</span><span class="w"> </span><span class="s2">"106"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39.28906"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"secsSinceReport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76.9323299"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"routeTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"predictable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"speedKmHr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dirTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"leoncomm"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"heading"</span><span class="p">:</span><span class="w"> </span><span class="s2">"319"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38.9839399"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"secsSinceReport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="w">
+</span><span class="p">}],</span><span class="w">
+</span><span class="nt">"lastTime"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1428715950117"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nt">"copyright"</span><span class="p">:</span><span class="w"> </span><span class="s2">"All data copyright University of Maryland 2015."</span><span class="p">,</span><span class="w">
+</span><span class="nt">"Error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last time \"t\" parameter must be specified in query string"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"shouldRetry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

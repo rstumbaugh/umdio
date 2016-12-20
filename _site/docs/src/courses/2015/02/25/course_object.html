@@ -1,0 +1,58 @@
+<p>The course object represents a single UMD course. The properties of a course are:</p>
+
+<p><code class="highlighter-rouge">course_id</code> – a unique string ID with a four-letter <code class="highlighter-rouge">dept_id</code> followed by a three digit course number and an optional letter. Examples: <em>“CSMC132”, “BMGT468Z”</em>.</p>
+
+<p><code class="highlighter-rouge">name</code> – string name of the course.</p>
+
+<p><code class="highlighter-rouge">dept_id</code> – Four-letter string like ENGL or BMGT.</p>
+
+<p><code class="highlighter-rouge">department</code> – Full name of the department that offers a course.</p>
+
+<p><code class="highlighter-rouge">semester</code> – Six-digit number identifying the semester the course is offered. Currently, the API only offers courses for the current semester, but that will change soon.</p>
+
+<p><code class="highlighter-rouge">credits</code> – One-digit number of credits the course is worth.</p>
+
+<p><code class="highlighter-rouge">grading_method</code> – Array of string grading options available. The possible options are <em>“Regular”, “Pass-Fail”, “Audit”, and “Sat-Fail”</em></p>
+
+<p><code class="highlighter-rouge">core</code> – Array of strings of CORE requirements filled by a course.</p>
+
+<p><code class="highlighter-rouge">gen_ed</code> – Array of strings of GEN. ED requirements filled by a course.</p>
+
+<p><code class="highlighter-rouge">description</code> – String description of a course.</p>
+
+<p><code class="highlighter-rouge">relationships</code> – contains the relationships and restrictions of a course which can be: <code class="highlighter-rouge">coreqs</code>, <code class="highlighter-rouge">prereqs</code>, <code class="highlighter-rouge">restrictions</code>, <code class="highlighter-rouge">restricted_to</code>, <code class="highlighter-rouge">credit_only_granted_for</code>, <code class="highlighter-rouge">credit_granted_for</code>,<code class="highlighter-rouge">formerly</code>, and <code class="highlighter-rouge">also_offered_as</code>.</p>
+
+<p><code class="highlighter-rouge">sections</code> – Array of <code class="highlighter-rouge">section_id</code> strings of the sections of a course. See <a href="#section_object">section object</a>.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample course object</strong></p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"course_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENEE380"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Electromagnetic Theory"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dept_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENEE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Electrical &amp; Computer Engineering"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"semester"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201501"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"grading_method"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Regular"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"core"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"gen_ed"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Introduction to electromagnetic..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"coreqs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"prereqs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Prerequisite: PHYS271, PHYS270, ..."</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"restricted_to"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"credit_only_granted_for"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"credit_granted_for"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"formerly"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"also_offered_as"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ENEE380-0101"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENEE380-0102"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENEE380-0103"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<!-- END -->

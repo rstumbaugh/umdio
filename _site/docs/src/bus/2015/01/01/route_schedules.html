@@ -1,0 +1,42 @@
+<p>Get the schedules for a route.</p>
+
+<p>Each route has multiple schedules, because buses run differently on different days of the week. umdio can’t guarantee that the buses will arrive at the scheduled times, but we’ll try to get the schedules to you.</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">http://api.umd.io/v0/bus/routes/:route_id/schedules</code></p>
+
+<p><em>Returns</em>: Array of bus schedules for the specified route.</p>
+
+<p>Each schedule has the days that schedule runs - ‘f’ for friday, ‘th’ for tuesday and thursday. Also, the direction of the route, route number, an array of the stops on the schedule, and an array of trips. The stops on the schedule are not all of the stops on the route, just the ones that are scheduled. The trips are each arrays of stops and the times the bus is scheduled to stop, in two formats: arrival_time, which is the <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> extended time format - hh:mm:ss - and a count of UNIX seconds since the beginning of the day - a number like 21600000, for 6:00 AM. All times are EST, since that’s local.</p>
+
+<!-- EXAMPLE -->
+<p><strong>Sample Request</strong></p>
+
+<p><code class="highlighter-rouge">GET http://api.umd.io/v0/bus/routes/115/schedules</code></p>
+
+<p>Trimmed Response:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[{</span><span class="w">
+  </span><span class="nt">"days"</span><span class="p">:</span><span class="s2">"f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"direction"</span><span class="p">:</span><span class="s2">"ramsapts"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"route"</span><span class="p">:</span><span class="s2">"701"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stops"</span><span class="p">:[{</span><span class="w">
+    </span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"peargara_d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Pearl St Garage"</span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"trips"</span><span class="p">:[[{</span><span class="w">
+    </span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"peargara_d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="s2">"06:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time_secs"</span><span class="p">:</span><span class="s2">"21600000"</span><span class="p">}],</span><span class="w">
+    </span><span class="p">[{</span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"peargara_d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="s2">"06:32:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time_secs"</span><span class="p">:</span><span class="s2">"23520000"</span><span class="p">}],</span><span class="w">
+    </span><span class="p">[{</span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"peargara_d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="s2">"07:04:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time_secs"</span><span class="p">:</span><span class="s2">"25440000"</span><span class="p">}],</span><span class="w">
+    </span><span class="p">[{</span><span class="nt">"stop_id"</span><span class="p">:</span><span class="s2">"peargara_d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="s2">"07:38:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time_secs"</span><span class="p">:</span><span class="s2">"27480000"</span><span class="p">}]]</span><span class="w">
+</span><span class="p">}]</span></code></pre></figure>
+
+<!-- END -->
