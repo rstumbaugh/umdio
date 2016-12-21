@@ -58,13 +58,13 @@ depts.each { |semester, dept_arr|
 	courses = []
 	coll = db.collection('testing')
 	bulk = coll.initialize_unordered_bulk_op
-	dept_arr.each { |dept|
+	dept_arr.each { |dept_id|
 		puts "Getting courses for #{dept}"
 
 		url = base_url + "#{semester}/#{dept}"
 		page = Nokogiri::HTML(open(url), nil, "UTF-8")
 
-  		dept_name = page.search('span.course-prefix-name').text.strip
+  		department = page.search('span.course-prefix-name').text.strip
 
 
 		page.search('div.course').each { |course|
@@ -136,8 +136,8 @@ depts.each { |semester, dept_arr|
 			courses << {
 				course_id: course_id,
 				name: course_title,
-				dept_id: dept,
-				department: dept_name,
+				dept_id: dept_id,
+				department: department,
 				semester: semester,
 				credits: course.css('span.course-min-credits').first.content,
 				grading_method: course.at_css('span.grading-method abbr') ? 
