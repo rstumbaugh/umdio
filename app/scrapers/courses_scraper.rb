@@ -53,12 +53,11 @@ end
 dep_urls.each do |url|
   dept_id = url.split('/soc/')[1][7,10] 
   semester = url.split('/soc/')[1][0,6] 
-  puts "Getting all courses for semester #{semester}"
   courses = []
   coll = db.collection('testing')
   bulk = coll.initialize_unordered_bulk_op
 
-  puts "Getting courses for #{dept_id}"
+  puts "Getting courses for #{dept_id} (#{semester})"
 
   page = Nokogiri::HTML(open(url), nil, "UTF-8")
 

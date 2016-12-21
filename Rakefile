@@ -47,7 +47,7 @@ end
 
 desc "Scrape courses only"
 task :scrape_course do
-  sh 'ruby app/scrapers/courses_scraper.rb 2017'
+  sh 'ruby app/scrapers/courses_scraper.rb 2016 2017'
 end
 
 task :setup => ['db:clean','db:up','scrape']
