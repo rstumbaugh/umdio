@@ -42,7 +42,7 @@ end
 
 desc "Test scraping"
 task :scrape_test do
-  sh 'ruby app/scrapers/temp.rb 2017'
+  sh 'ruby app/scrapers/temp.rb 2016'
 end
 
 desc "Scrape courses only"
