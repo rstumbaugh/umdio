@@ -54,7 +54,8 @@ section_queries.each do |query|
 		puts "Getting prof for #{course_id} (#{semester})"
 
 		course_div.search('div.section').each do |section|
-			instructors = section.search('span.section-instructors').text.gsub(/\t|\r\n/,'').encode('UTF-8', :invalid => :replace).split(',').map(&:strip)
+			instructors = section.search('span.section-instructors').text.gsub(/\t|\r\n/,'').encode('UTF-8', :invalid => :replace).split(',')
+			instructors.map!(&:strip)
 			instructors.each do |x| 
 				profs[x] ||= []
 				profs[x] |= [course_id]
@@ -65,7 +66,7 @@ section_queries.each do |query|
 	profs.sort.to_h.each do |name, courses|
 		# push all courses to prof's entry
 		bulk.find({name: name}).upsert.update(
-			{"$set" => {name: name},
+			{"$set" => {name: name, semester: semester},
 			 "$addToSet" => {courses: {"$each" => courses} }
 			}
 		)
