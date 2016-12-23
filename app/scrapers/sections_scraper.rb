@@ -35,11 +35,14 @@ total = 0
 # Parse section data from pages
 section_queries.each do |query|
   semester = query.scan(/soc\/(.+)\//)[0][0]
-  coll = db.collection("sections#{semester}")
-  bulk = coll.initialize_unordered_bulk_op
+  sections_coll = db.collection("sections#{semester}")
+  prof_coll = db.collection("prof#{semester}")
+  sections_bulk = sections_coll.initialize_unordered_bulk_op
+  prof_bulk = prof_coll.initialize_unordered_bulk_op
   page = Nokogiri::HTML(open(query))
   course_divs = page.search("div.course-sections")
   section_array = []
+  prof_array = []
 
   # for each of the courses on the page
   course_divs.each do |course_div|
@@ -47,6 +50,8 @@ section_queries.each do |query|
     # for each section of the course
     course_div.search("div.section").each do |section|
       # add section to array to add
+      instructors = section.search('span.section-instructors').text.gsub(/\t|\r\n/,'').encode('UTF-8', :invalid => :replace).split(',').map(&:strip)
+      
       meetings = []
       section.search('div.class-days-container div.row').each do |meeting|
         start_time = meeting.search('span.class-start-time').text
@@ -84,7 +89,7 @@ section_queries.each do |query|
   # Should be upsert not insert, so we can run multiple times without having to drop the database
   # coll.insert(section_array) unless section_array.empty?
   section_array.each do |section|
-    bulk.find({section_id: section[:section_id]}).upsert.update({ "$set" => section })
+    sections_bulk.find({section_id: section[:section_id]}).upsert.update({ "$set" => section })
   end
-  bulk.execute unless section_array.empty?
+  sections_bulk.execute unless section_array.empty?
 end
