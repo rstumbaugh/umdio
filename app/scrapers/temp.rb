@@ -10,151 +10,54 @@ host = 'localhost'
 port = MongoClient::DEFAULT_PORT
 
 puts "Connecting to #{host} at port #{port}"
-db = MongoClient.new(host, port, pool_size: 2, pool_timeout: 2).db("testing")
+db_class = MongoClient.new(host, port, pool_size: 2, pool_timeout: 2).db('umdclass')
+db_test = MongoClient.new(host, port, pool_size: 2, pool_timeout: 2).db('testing')
 
-# list of years to scrape passed as param from Rakefile
-years = ARGV
-
-# get all semesters in each year
-semesters = []
-years.each { |year|
-	# semesters.push(year + '01')
-	# semesters.push(year + '05')
-	semesters.push(year + '08')
-	# semesters.push(year + '12')
-}
-
-puts "semesters: #{semesters}"
-
-# base url for schedule of classes
-base_url = "https://ntst.umd.edu/soc/"
-
-
-# make hash of semester => list of departments
-depts = {}
-num_depts = 0
-semesters.each { |semester|
-	depts[semester] = []
-	puts "Searching for departments in term #{semester}"
-
-	url = base_url + semester
-	Nokogiri::HTML(open(url)).search('span.prefix-abbrev').each { |dept_abbrev|
-		depts[semester].push dept_abbrev.text
-		num_depts += 1
-	}
-
-	puts "#{num_depts} departments found so far..."
-}
-
-def utf_safe text
-  if !text.valid_encoding?
-    text = text.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-  end
-  text
+# Architecture:
+# build list of queries
+semesters_to_check = ["courses201601", "courses201605", "courses201608", "courses201612"]
+course_collections = semesters_to_check.map { |e| db_class.collection(e) }
+section_queries = []
+course_collections.each do |c|
+	semester = c.name.scan(/courses(.+)/)[0]
+	if not semester.nil?
+		semester = semester[0]
+		c.find({},{fields: {_id:0,course_id:1}}).to_a
+		.each_slice(200){|a| 
+			section_queries << 
+		"https://ntst.umd.edu/soc/#{semester}/sections?courseIds=#{a.map{|e| e['course_id']}.join(',')}"}
+	end
 end
 
-depts.each { |semester, dept_arr|
-	puts "Getting all courses for semester #{semester}"
-	courses = []
-	coll = db.collection('testing')
-	bulk = coll.initialize_unordered_bulk_op
-	dept_arr.each { |dept_id|
-		puts "Getting courses for #{dept}"
+puts "added all urls"
 
-		url = base_url + "#{semester}/#{dept}"
-		page = Nokogiri::HTML(open(url), nil, "UTF-8")
+# separate by collections by semester (prof201608)
+# store in a hash of course id => array of sections?
+# for now, just store array of course ids
 
-  		department = page.search('span.course-prefix-name').text.strip
+section_queries.each do |query|
+	page = Nokogiri::HTML(open(query))
+	prof_coll = db_test.collection("testing")
+	bulk = prof_coll.initialize_unordered_bulk_op
 
 
-		page.search('div.course').each { |course|
-			course_id = course.search('div.course-id').text
-			course_title = course.search('span.course-title').text
-			credits = course.search('span.course-min-credits').text
-
-			approved = course.search('div.approved-course-texts-container')
-			other = course.search('div.course-texts-container')
-
-			if approved.css('> div').length > 1 then 
-				text = approved.css('> div:first-child').text.strip + other.css('> div').text.strip
-			else 
-				text = other.css('> div').text.strip
-			end
-
-			text = utf_safe text
-
-			match = /Prerequisite: ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			prereq = match ? match[1] : nil
+	semester = query.scan(/soc\/(.+)\//)[0][0]
+	course_divs = page.search('div.course-sections')
 
 
-			match = /Corequisite: ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			coreq = match ? match[1] : nil
+	profs = {}
 
-			match = /(?:Restricted to)|(?:Restriction:) ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			restrictions = match ? match[1] : nil
+	course_divs.each do |course_div|
+		course_id = course_div.attr('id')
 
-			match = /Credit (?:(?:only )|(?:will be ))?granted for(?: one of the following)?:? ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			credit_granted_for = match ? match[1] : nil
-
-			match = /Also offered as:? ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			also_offered_as = match ? match[1] : nil
+		course_div.search('div.section').each do |section|
+			instructors = section.search('span.section-instructors').text.gsub(/\t|\r\n/,'').encode('UTF-8', :invalid => :replace).split(',').map(&:strip)
+			puts "#{course_id}: #{instructors}"
+		end
+	end
 
 
-			match = /Formerly:? ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			formerly = match ? match[1] : nil
-
-			match = /Additional information: ([^.]+\.)/.match(text)
-			text = match ? text.gsub(match[0], '') : text
-			additional_info = match ? match[1] : nil
-
-			if approved.css('> div').length > 0 then
-
-				description = utf_safe approved.css('> div:last-child').text.strip.gsub(/\t|(\r\n)/, '')
-				additional_info = additional_info ? additional_info += ' '+text : text
-				additional_info = additional_info && additional_info.strip.empty? ? nil : additional_info.strip
-
-			elsif other.css('> div').length > 0 then
-				description = text.strip.empty? ? nil : text.strip
-			end
-
-			relationships = {
-				prereqs: prereq,
-				coreqs: coreq,
-				restrictions: restrictions,
-				credit_granted_for: credit_granted_for,
-				also_offered_as: also_offered_as,
-				formerly: formerly,
-				additional_info: additional_info 
-			}
-
-			courses << {
-				course_id: course_id,
-				name: course_title,
-				dept_id: dept_id,
-				department: department,
-				semester: semester,
-				credits: course.css('span.course-min-credits').first.content,
-				grading_method: course.at_css('span.grading-method abbr') ? 
-								course.at_css('span.grading-method abbr').attr('title').split(', ') : [],
-				core: utf_safe(course.css('div.core-codes-group').text).gsub(/\s/, '').delete('CORE:').split(','),
-				gen_ed: utf_safe(course.css('div.gen-ed-codes-group').text).gsub(/\s/, '').delete('General Education:').split(','),
-				description: description,
-				relationships: relationships
-			}
-		}
-	}
-
-	courses.each { |course|
-		bulk.find({course_id: course[:course_id]}).upsert.update({ "$set" => course })
-	}
-	bulk.execute
-}
+end
 
 
 
