@@ -11,34 +11,32 @@ port = MongoClient::DEFAULT_PORT
 
 puts "Connecting to #{host} at port #{port}"
 db_class = MongoClient.new(host, port, pool_size: 2, pool_timeout: 2).db('umdclass')
-db_test = MongoClient.new(host, port, pool_size: 2, pool_timeout: 2).db('testing')
 
 # Architecture:
 # build list of queries
-semesters_to_check = ["201601"]
-course_collections = semesters_to_check.map { |e| db_class.collection("courses#{e}") }
+course_collections = db_class.collection_names().select { |e| e.include?('courses') }.map { |name| db_class.collection(name) }
 section_queries = []
 course_collections.each do |c|
-	semester = c.name.scan(/courses(.+)/)[0]
-	if not semester.nil?
-		semester = semester[0]
-		c.find({},{fields: {_id:0,course_id:1}}).to_a
-		.each_slice(200){|a| 
-			section_queries << 
-		"https://ntst.umd.edu/soc/#{semester}/sections?courseIds=#{a.map{|e| e['course_id']}.join(',')}"}
-	end
+  semester = c.name.scan(/courses(.+)/)[0]
+  if not semester.nil?
+    semester = semester[0]
+    c.find({},{fields: {_id:0,course_id:1}}).to_a
+      .each_slice(200){|a| section_queries << 
+        "https://ntst.umd.edu/soc/#{semester}/sections?courseIds=#{a.map{|e| e['course_id']}.join(',')}"}
+  end
 end
 
 puts "added all urls"
+
 
 # separate by collections by semester (prof201608)
 # store in a hash of course id => array of sections?
 # for now, just store array of course ids
 
-prof_coll = db_test.collection("testing_profs")
-
 section_queries.each do |query|
+  	semester = query.scan(/soc\/(.+)\//)[0][0]
 	page = Nokogiri::HTML(open(query))
+	prof_coll = db_class.collection("profs#{semester}");
 	bulk = prof_coll.initialize_unordered_bulk_op
 
 
@@ -67,9 +65,9 @@ section_queries.each do |query|
 		# push all courses to prof's entry
 		bulk.find({name: name}).upsert.update(
 			{"$set" => {name: name, semester: semester},
-			 "$addToSet" => {courses: {"$each" => courses} }
+			 "$addToSet" => {course: {"$each" => courses} }
 			}
-		)
+	)
 	end
 	bulk.execute unless profs.empty?
 end
